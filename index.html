@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Contact</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        textarea {
+            height: 120px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #111;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h2>Customer Contact</h2>
+
+    <label>Name</label>
+    <input id="name" placeholder="Customer name">
+
+    <label>Phone</label>
+    <input id="phone" placeholder="9876543210">
+
+    <label>Email</label>
+    <input id="email" placeholder="customer@email.com">
+
+    <label>Message</label>
+    <textarea id="message"
+        placeholder="Enter your message"></textarea>
+
+    <button onclick="sendAll()">
+        🚀 Send All
+    </button>
+
+</div>
+
+<script>
+
+function sendAll() {
+
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    const encodedMessage = encodeURIComponent(message);
+
+    // WhatsApp
+    const whatsapp =
+        "https://wa.me/91" + phone +
+        "?text=" + encodedMessage;
+
+    // SMS
+    const sms =
+        "sms:" + phone +
+        "?body=" + encodedMessage;
+
+    // Email
+    const mail =
+        "mailto:" + email +
+        "?subject=" +
+        encodeURIComponent("Follow-up") +
+        "&body=" +
+        encodedMessage;
+
+    window.open(whatsapp, "_blank");
+
+    setTimeout(function() {
+        window.location.href = sms;
+    }, 1000);
+
+    setTimeout(function() {
+        window.location.href = mail;
+    }, 2000);
+}
+
+</script>
+
+</body>
+</html>
